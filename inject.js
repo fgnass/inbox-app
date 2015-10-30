@@ -1,6 +1,6 @@
 var ipc = require('ipc');
 
-var seen = {};
+var seen;
 
 function extractData(ss) {
   var id, avatar, sender, subject;
@@ -54,12 +54,18 @@ function checkState() {
   var count = messages.length;
   ipc.send('unread', '' + count);
 
+  var fistTime = !seen;
+  if (firstTime) seen = {};
+
   getNew(messages).forEach(function(msg) {
-    new Notification(msg.sender, {
-      tag: msg.id,
-      body: msg.subject,
-      icon: msg.avatar
-    });
+    if (!firstTime) {
+      // Don't show notifications upon startup
+      new Notification(msg.sender, {
+        tag: msg.id,
+        body: msg.subject,
+        icon: msg.avatar
+      });
+    }
     seen[msg.id] = true;
   })
 
