@@ -54,7 +54,7 @@ function checkState() {
   var count = messages.length;
   ipc.send('unread', '' + count);
 
-  var fistTime = !seen;
+  var firstTime = !seen;
   if (firstTime) seen = {};
 
   getNew(messages).forEach(function(msg) {
