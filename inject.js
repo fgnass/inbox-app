@@ -5,7 +5,7 @@ var seen;
 function extractData(ss) {
   var id, avatar, sender, subject;
 
-  var p = ss.parentNode.parentNode.parentNode.parentNode;
+  var p = ss.parentNode.parentNode.parentNode.parentNode.parentNode;
   var a = p.querySelector('[data-action-data]');
   var action = a.dataset.actionData;
   id = /#.+?:([^"]+)/.exec(action)[1];
