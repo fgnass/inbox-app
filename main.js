@@ -78,6 +78,7 @@ app.on('ready', function() {
   });
 
   wc.on('dom-ready', function() {
+    wc.insertCSS(fs.readFileSync(__dirname + '/inject.css', 'utf8'));
     wc.executeJavaScript(fs.readFileSync(__dirname + '/inject.js', 'utf8'));
   });
 
