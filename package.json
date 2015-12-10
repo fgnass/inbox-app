@@ -11,9 +11,5 @@
   "scripts": {
     "pack-icons": "iconutil -c icns icon.iconset",
     "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.34.1 --icon=icon.icns"
-  },
-  "dependencies": {
-    "request": "^2.65.0",
-    "temp": "^0.8.3"
   }
 }

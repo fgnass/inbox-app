@@ -14,10 +14,6 @@ app.on('window-all-closed', function() {
   app.quit();
 });
 
-app.on('browser-window-created', function() {
-  console.log('browser-window-created', arguments);
-});
-
 // This method will be called when Electron has done everything
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
@@ -52,14 +48,12 @@ app.on('ready', function() {
   var wc = win.webContents;
 
   wc.on('new-window', function(ev, url, name) {
-    //TODO Gmail uses window.open('?parm=value') which currently
-    //does not work in electron. Hence we prevent the default for
-    //al kinds of URLs.
+    console.log(url);
+
+    //TODO create a new BrowserWindow for mail.google.com / google-mail.com links
+    // i.e. links to attachments
     ev.preventDefault();
-    if (url[0] != '?') {
-      // Open external URLs in the default browser
-      shell.openExternal(url);
-    }
+    shell.openExternal(url);
 
   });
 
@@ -79,15 +73,12 @@ app.on('ready', function() {
 
   wc.on('dom-ready', function() {
     wc.insertCSS(fs.readFileSync(__dirname + '/inject.css', 'utf8'));
+    wc.executeJavaScript('module.paths.push("' + __dirname + '/node_modules")');
     wc.executeJavaScript(fs.readFileSync(__dirname + '/inject.js', 'utf8'));
   });
 
-  // Emitted when the window is closed.
   win.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null;
     app.dock.setBadge('');
+    app.quit();
   });
 });
