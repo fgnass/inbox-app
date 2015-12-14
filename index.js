@@ -1,9 +1,11 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
 var fs = require('fs');
-var ipc = require('ipc');
-var Menu = require('menu');
-var shell = require('shell');
+var URL = require('url');
+var electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
+var ipc = electron.ipcMain;
+var Menu = electron.Menu;
+var shell = electron.Shell;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the javascript object is GCed.
@@ -21,7 +23,8 @@ app.on('ready', function() {
   // Create the browser window.
   win = new BrowserWindow({
     width: 1024,
-    height: 768
+    height: 768,
+    'title-bar-style': 'hidden-inset'
   });
 
   var template = [{
@@ -48,16 +51,14 @@ app.on('ready', function() {
   var wc = win.webContents;
 
   wc.on('new-window', function(ev, url, name) {
-    console.log(url);
-
-    //TODO create a new BrowserWindow for mail.google.com / google-mail.com links
-    // i.e. links to attachments
-    ev.preventDefault();
-    shell.openExternal(url);
-
+    var host = URL.parse(url).host;
+    if (host != 'mail.google.com' && host != 'google-mail.com') {
+      ev.preventDefault();
+      shell.openExternal(url);
+    }
   });
 
-  win.loadUrl('https://inbox.google.com');
+  win.loadURL('https://inbox.google.com');
 
   var prevCount;
   ipc.on('unread', function(event, count) {
@@ -71,14 +72,15 @@ app.on('ready', function() {
     prevCount = count;
   });
 
-  wc.on('dom-ready', function() {
-    wc.insertCSS(fs.readFileSync(__dirname + '/inject.css', 'utf8'));
-    wc.executeJavaScript('module.paths.push("' + __dirname + '/node_modules")');
-    wc.executeJavaScript(fs.readFileSync(__dirname + '/inject.js', 'utf8'));
+  app.on('will-quit', function() {
+    app.dock.setBadge('');
   });
 
-  win.on('closed', function() {
-    app.dock.setBadge('');
-    app.quit();
+  win.once('page-title-updated', function() {
+    wc.insertCSS(fs.readFileSync(__dirname + '/web/custom.css', 'utf8'));
+    wc.executeJavaScript('module.paths.push("' + __dirname + '/node_modules");');
+    wc.executeJavaScript('module.paths.push("' + __dirname + '/web");');
+    wc.executeJavaScript('require("inject");');
   });
+
 });
