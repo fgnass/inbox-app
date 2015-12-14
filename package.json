@@ -2,14 +2,19 @@
   "name": "inbox-app",
   "version": "1.0.0",
   "description": "Electron",
-  "main": "main.js",
+  "main": "index.js",
   "author": "Felix Gnass <fgnass@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "electron-packager": "^5.1.0"
-  },
   "scripts": {
+    "rebuild": "electron-rebuild",
     "pack-icons": "iconutil -c icns icon.iconset",
-    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.34.1 --icon=icon.icns"
+    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.0 --icon=icon.icns"
+  },
+  "dependencies": {
+    "spellchecker": "^3.1.3"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.1.0",
+    "electron-rebuild": "^1.0.2"
   }
 }

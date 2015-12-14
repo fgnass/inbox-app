@@ -1,0 +1,70 @@
+input, textarea, keygen, select, option, button {
+  font-family: sans-serif;
+}
+
+/* don't scroll the body so that the fixed header doesn't move on overscroll */
+body {
+  overflow-y: hidden !important;
+}
+#Nr {
+  overflow-y: auto;
+  background: #f2f2f2;
+}
+
+/* dark sidebar
+ **************/
+
+body .lQ {
+  background: rgb(33,37,43);
+  color: #d2d2d2;
+}
+
+/* active item */
+body .hA {
+  color: #fff;
+}
+
+/* round scrollbar thumb */
+body .lQ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+}
+
+/* hide dividers */
+body .Y {
+  border-bottom: none;
+}
+
+/* lighten dark icons */
+.lQ img[src*=ic_custom-cluster],
+.lQ img[src*=ic_draft],
+.lQ img[src*=ic_sent],
+.lQ img[src*=ic_reminder],
+.lQ img[src*=ic_trash],
+.lQ img[src*=ic_spam],
+.lQ img[src*=ic_contacts],
+.lQ img[src*=ic_low_priority],
+.lQ img[src*=ic_add_cluster],
+.lQ img[src*=ic_settings],
+.lQ img[src*=ic_help] {
+  -webkit-filter: invert() brightness(0.5);
+}
+
+/* title bar
+ ************/
+
+/* make room for window controls */
+.c7 {
+  margin-left: 64px;
+}
+
+/* hide google apps and notifications */
+#lQGP9e,
+#gbwa,
+#gbwa + div {
+  display: none;
+}
+
+/* shrink the icon container */
+div[style='min-width: 120px;'] {
+  min-width: inherit !important;
+}
