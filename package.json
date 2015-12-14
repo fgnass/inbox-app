@@ -2,7 +2,7 @@
   "name": "inbox-app",
   "version": "1.0.0",
   "description": "Electron",
-  "main": "index.js",
+  "main": "app",
   "author": "Felix Gnass <fgnass@gmail.com>",
   "license": "MIT",
   "scripts": {
