@@ -1,12 +1,7 @@
 # Google Inbox packaged as electron app
 
-This is a very thin wrapper around the Google Inbox web interface built with
+This is a thin wrapper around the Google Inbox web interface built with
 [electron](http://electron.atom.io/).
-
-It loads https://inbox.google.com and injects a small script that
-sends `document.getElementsByClassName('ss').length;` to the main process once
-per second. That value is used to display an _unread messages_ badge in the
-OS X dock.
 
 ![screenshot](screenshot.png)
 
@@ -17,3 +12,14 @@ npm install
 npm run pack-osx
 cp -r Inbox-darwin-x64/Inbox.app /Applications
 ```
+
+# License
+
+The code in this repository has been released to the public domain
+under the [UNLICENSE](./UNLICENSE).
+
+# Disclaimer
+
+This project is not affiliated with, associated to, nor endorsed by Google
+in any way. Google, Inbox by Gmail and the Google Inbox Logo are registered
+trademarks of Google Inc.

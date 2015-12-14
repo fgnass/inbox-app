@@ -7,17 +7,11 @@ var ipc = electron.ipcMain;
 var Menu = electron.Menu;
 var shell = electron.Shell;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the javascript object is GCed.
-var win = null;
-
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   app.quit();
 });
 
-// This method will be called when Electron has done everything
-// initialization and ready for creating browser windows.
 app.on('ready', function() {
 
   // Create the browser window.
