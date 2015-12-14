@@ -20,7 +20,8 @@ body .lQ {
 }
 
 /* active item */
-body .hA {
+body .hA,
+body .dk {
   color: #fff;
 }
 
