@@ -16,15 +16,10 @@ function extractData(ss) {
     id = p.innerText.replace(/\W/g, '');
   }
 
-  if (p.classList.contains('full-cluster-item')) {
-    // Ignore messages in expanded clusters
-    return;
-  }
+  if (p.classList.contains('full-cluster-item')
+    || p.querySelector('.itemIconMarkedDone')
+  ) return;
 
-  if (p.querySelector('.itemIconMarkedDone')) {
-    // Ignore items marked as done
-    return;
-  }
 
   subject = (p.querySelector('.lt') || p.querySelector('.qG span')).textContent;
 
@@ -61,10 +56,7 @@ function getNew(messages) {
 }
 
 function getUnreadMessages() {
-  if (document.querySelector('.hn.cb')) {
-    // The "Done" folder
-    return [];
-  }
+  if (!document.querySelector('.hn.b4')) return []; // not inside the inbox
   var nodes = Array.prototype.slice.call(document.querySelectorAll('.ss'));
   return nodes.map(extractData).filter(Boolean);
 }
