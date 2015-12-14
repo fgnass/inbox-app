@@ -1,9 +1,16 @@
-# Google Inbox packaged as electron app
+# Google Inbox packaged as Electron app
 
-This is a thin wrapper around the Google Inbox web interface built with
-[electron](http://electron.atom.io/).
+This is a thin wrapper around the Google Inbox web interface built on
+[Electron](http://electron.atom.io/).
 
 ![screenshot](screenshot.png)
+
+## Features
+
+* Native desktop notifications
+* Unread messages badge in OS X dock
+* Native spell checking
+* Dark sidebar theme
 
 ## Building
 
