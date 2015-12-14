@@ -21,6 +21,11 @@ function extractData(ss) {
     return;
   }
 
+  if (p.querySelector('.itemIconMarkedDone')) {
+    // Ignore items marked as done
+    return;
+  }
+
   subject = (p.querySelector('.lt') || p.querySelector('.qG span')).textContent;
 
   var brand = ss.getAttribute('brand_name');
@@ -56,6 +61,10 @@ function getNew(messages) {
 }
 
 function getUnreadMessages() {
+  if (document.getQuerySelector('.hn.cb')) {
+    // The "Done" folder
+    return [];
+  }
   var nodes = Array.prototype.slice.call(document.querySelectorAll('.ss'));
   return nodes.map(extractData).filter(Boolean);
 }
