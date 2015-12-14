@@ -11,6 +11,16 @@ function extractData(ss) {
   var action = a.dataset.actionData;
   id = /#.+?:([^"]+)/.exec(action)[1];
 
+  if (id.indexOf('^' === 0)) {
+    // Use innerText for clusters
+    id = p.innerText.replace(/\W/g, '');
+  }
+
+  if (p.classList.contains('full-cluster-item')) {
+    // Ignore messages in expanded clusters
+    return;
+  }
+
   subject = (p.querySelector('.lt') || p.querySelector('.qG span')).textContent;
 
   var brand = ss.getAttribute('brand_name');
@@ -47,7 +57,7 @@ function getNew(messages) {
 
 function getUnreadMessages() {
   var nodes = Array.prototype.slice.call(document.querySelectorAll('.ss'));
-  return nodes.map(extractData);
+  return nodes.map(extractData).filter(Boolean);
 }
 
 function checkState() {
