@@ -46,13 +46,13 @@ function extractData(ss) {
     subject: subject,
     sender: ss.textContent,
     avatar: avatar
-  }
+  };
 }
 
 function getNew(messages) {
   return messages.filter(function(msg) {
     return !seen[msg.id];
-  })
+  });
 }
 
 function getUnreadMessages() {
@@ -78,7 +78,7 @@ function checkState() {
       });
     }
     seen[msg.id] = true;
-  })
+  });
 
   setTimeout(checkState, 1000);
 }

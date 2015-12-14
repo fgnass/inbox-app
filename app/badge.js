@@ -20,4 +20,4 @@ module.exports = function(win) {
   app.on('will-quit', function() {
     app.dock.setBadge('');
   });
-}
+};

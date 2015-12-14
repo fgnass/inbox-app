@@ -1,0 +1,24 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "semi": [2, "always"],
+    "brace-style": [2, "stroustrup"],
+    "consistent-return": 0,
+    "camelcase": 0,
+    "new-cap": 0,
+    "curly": [2, "multi-line"],
+    "eqeqeq": 0,
+    "no-path-concat": 0,
+    "no-undef": [2, { "typeof": true }],
+    "no-underscore-dangle": 0,
+    "no-use-before-define": [2, "nofunc"],
+    "quotes": [2, "single", "avoid-escape"],
+    "space-after-keywords": [2, "always"],
+    "space-before-blocks": [2, "always"],
+    "space-before-function-paren": [2, "never"],
+    "strict": [2, "never"]
+  }
+}

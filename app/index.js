@@ -12,7 +12,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  win = new BrowserWindow({
+  var win = new BrowserWindow({
     width: 1024,
     height: 768,
     'title-bar-style': 'hidden-inset'

@@ -11,4 +11,4 @@ module.exports = function(win) {
     wc.executeJavaScript('module.paths.push("' + dir + '/web");');
     wc.executeJavaScript('require("inject");');
   });
-}
+};

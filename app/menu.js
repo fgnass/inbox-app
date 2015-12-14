@@ -5,8 +5,20 @@ module.exports = function(win) {
   var template = [{
     label: 'Inbox',
     submenu: [
-      { label: 'Quit', accelerator: 'Command+Q', click: function() { electron.app.quit(); }},
-      { label: 'Developer Tools', accelerator: 'Command+Alt+J', click: function() { win.openDevTools(); }}
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() {
+          electron.app.quit();
+        }
+      },
+      {
+        label: 'Developer Tools',
+        accelerator: 'Command+Alt+J',
+        click: function() {
+          win.openDevTools();
+        }
+      }
     ]}, {
     label: 'Edit',
     submenu: [

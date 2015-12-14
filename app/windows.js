@@ -1,4 +1,6 @@
 var URL = require('url');
+var electron = require('electron');
+var shell = electron.shell;
 
 module.exports = function(win) {
   var wc = win.webContents;
