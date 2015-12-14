@@ -1,4 +1,5 @@
-var ipc = require('electron').ipcMainequire('ipc');
+var electron = require('electron');
+var ipc = electron.ipcRenderer;
 
 var seen;
 
