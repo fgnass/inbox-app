@@ -61,7 +61,7 @@ function getNew(messages) {
 }
 
 function getUnreadMessages() {
-  if (document.getQuerySelector('.hn.cb')) {
+  if (document.querySelector('.hn.cb')) {
     // The "Done" folder
     return [];
   }
