@@ -1,6 +1,6 @@
 var electron = require('electron');
 var ipc = electron.ipcRenderer;
-
+var click = require('./click');
 var seen;
 
 function extractData(ss) {
@@ -12,8 +12,8 @@ function extractData(ss) {
   id = /#.+?:([^"]+)/.exec(action)[1];
 
   if (id.indexOf('^' === 0)) {
-    // Use innerText for clusters
-    id = p.innerText.replace(/\W/g, '');
+    // Use textContent for clusters
+    id = p.textContent.replace(/\W/g, '');
   }
 
   if (p.classList.contains('full-cluster-item')
@@ -41,11 +41,14 @@ function extractData(ss) {
     }
   }
 
+  console.log(id, subject);
+
   return {
     id: id,
     subject: subject,
     sender: ss.textContent,
-    avatar: avatar
+    avatar: avatar,
+    element: ss
   };
 }
 
@@ -76,6 +79,10 @@ function checkState() {
         tag: msg.id,
         body: msg.subject,
         icon: msg.avatar
+      })
+      .addEventListener('click', function(ev) {
+        //TODO Show window
+        click(msg.element);
       });
     }
     seen[msg.id] = true;
