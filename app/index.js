@@ -11,6 +11,6 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   var win = inbox.open('https://inbox.google.com');
-  menu(win);
+  menu();
   badge();
 });
