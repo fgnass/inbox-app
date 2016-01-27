@@ -8,7 +8,7 @@
   "scripts": {
     "rebuild": "electron-rebuild",
     "pack-icons": "iconutil -c icns icon.iconset",
-    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.0 --icon=icon.icns"
+    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.5 --icon=icon.icns"
   },
   "dependencies": {
     "spellchecker": "^3.1.3"
