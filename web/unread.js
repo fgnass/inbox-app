@@ -1,5 +1,6 @@
 var electron = require('electron');
 var ipc = electron.ipcRenderer;
+var remote = electron.remote;
 var click = require('./click');
 var seen;
 
@@ -81,7 +82,7 @@ function checkState() {
         icon: msg.avatar
       })
       .addEventListener('click', function(ev) {
-        //TODO Show window
+        remote.getCurrentWindow().show();
         click(msg.element);
       });
     }
