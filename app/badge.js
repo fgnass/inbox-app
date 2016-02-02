@@ -5,18 +5,27 @@ var ipc = electron.ipcMain;
 
 module.exports = function() {
 
-  var counters = new Map();
-
+  // Sum up the `unreadCount` property of all open windows
   function getTotal() {
-    return Array.from(counters.values()).reduce(function(p, c) {
-      return p + c;
-    });
+    return BrowserWindow.getAllWindows().reduce(function(total, win) {
+      return total + (win.unreadCount || 0);
+    }, 0);
   }
 
-  function update(win, count) {
-    var prev = getTotal();
-    counters.set(win.id, parseFloat(count));
+  // Return the window where the last message was received
+  function getLatestMessageWindow() {
+    return BrowserWindow.getAllWindows()
+      .filter(function(win) {
+        return win.unreadCount;
+      })
+      .sort(function(a, b) {
+        return a.lastUnreadTime > b.lastUnreadTime ? 1 : -1;
+      })[0];
+  }
 
+  // Update the dock badge
+  function update() {
+    var prev = app.dock.getBadge();
     var total = getTotal();
     if (total > 0) {
       app.dock.setBadge('' + total);
@@ -27,20 +36,23 @@ module.exports = function() {
     }
   }
 
+  // Update the `unreadCount` property of the sender's BrowserWindow
   ipc.on('unread', function(event, count) {
     var win = BrowserWindow.fromWebContents(event.sender);
-
-    if (!counters.has(win.id)) {
-      counters.set(win.id, 0);
-      win.on('close', function() {
-        update(win, 0);
-      });
+    if (win.unreadCount === undefined) {
+      win.on('close', update);
     }
-
-    update(win, count);
+    win.unreadCount = parseFloat(count);
+    win.lastUnreadTime = Date.now();
+    update();
   });
 
   app.on('will-quit', function() {
     app.dock.setBadge('');
+  });
+
+  app.on('activate', function() {
+    var win = getLatestMessageWindow();
+    if (win) win.show();
   });
 };
