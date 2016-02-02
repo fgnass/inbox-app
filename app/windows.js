@@ -16,7 +16,7 @@ module.exports = function(win) {
     var host = URL.parse(url).host;
     if (host == 'inbox.google.com') {
       ev.preventDefault();
-      inbox.open(url);
+      inbox.open(url, name);
     }
     else if (!~googleHosts.indexOf(host)) {
       ev.preventDefault();

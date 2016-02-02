@@ -15,6 +15,7 @@ function getUserId(url) {
   return m ? parseFloat(m[1]) : 0;
 }
 
+// Returns the window for the given user id
 function getUserWindow(id) {
   var all = BrowserWindow.getAllWindows();
   for (var i = 0; i < all.length; i++) {
@@ -24,7 +25,7 @@ function getUserWindow(id) {
   }
 }
 
-exports.open = function(url) {
+exports.open = function(url, name) {
   // look for an existing window
   var id = getUserId(url);
   var win = getUserWindow(id);
@@ -32,12 +33,14 @@ exports.open = function(url) {
     win.show();
     return win;
   }
-
   var win = new BrowserWindow({
     width: 1024,
     height: 768,
+    show: name != '_minimized',
     'title-bar-style': 'hidden-inset'
   });
+
+  if (name == '_minimized') win.minimize();
 
   inject(win);
   windows(win);
