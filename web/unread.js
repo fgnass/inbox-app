@@ -2,6 +2,8 @@ var electron = require('electron');
 var ipc = electron.ipcRenderer;
 var remote = electron.remote;
 var click = require('./click');
+var qsa = require('./qsa');
+
 var seen;
 
 function extractData(ss) {
@@ -42,8 +44,6 @@ function extractData(ss) {
     }
   }
 
-  console.log(id, subject);
-
   return {
     id: id,
     subject: subject,
@@ -61,8 +61,7 @@ function getNew(messages) {
 
 function getUnreadMessages() {
   if (!document.querySelector('.hn.b4')) return []; // not inside the inbox
-  var nodes = Array.prototype.slice.call(document.querySelectorAll('.ss'));
-  return nodes.map(extractData).filter(Boolean);
+  return qsa('.ss').map(extractData).filter(Boolean);
 }
 
 function checkState() {
