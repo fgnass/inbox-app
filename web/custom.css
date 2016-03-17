@@ -66,6 +66,11 @@ body .Y {
   display: none;
 }
 
+/* move on the right Hangout icon to replace hidden tools */
+#lQGP9e {
+  right: 85px !important;
+}
+
 /* shrink the icon container */
 div[style='min-width: 120px;'] {
   min-width: inherit !important;
