@@ -25,14 +25,16 @@ module.exports = function() {
 
   // Update the dock badge
   function update() {
-    var prev = app.dock.getBadge();
-    var total = getTotal();
-    if (total > 0) {
-      app.dock.setBadge('' + total);
-      if (total > prev) app.dock.bounce('informational');
-    }
-    else {
-      app.dock.setBadge('');
+    if (typeof app.dock !== "undefined") {
+      var prev = app.dock.getBadge();
+      var total = getTotal();
+      if (total > 0) {
+        app.dock.setBadge('' + total);
+        if (total > prev) app.dock.bounce('informational');
+      }
+      else {
+        app.dock.setBadge('');
+      }
     }
   }
 
@@ -48,7 +50,9 @@ module.exports = function() {
   });
 
   app.on('will-quit', function() {
-    app.dock.setBadge('');
+    if (typeof app.dock !== "undefined") {
+      app.dock.setBadge('');
+    }
   });
 
   app.on('activate', function() {
