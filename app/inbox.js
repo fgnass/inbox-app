@@ -37,7 +37,8 @@ exports.open = function(url, name) {
     width: 1024,
     height: 768,
     show: name != '_minimized',
-    'title-bar-style': 'hidden-inset'
+    'title-bar-style': 'hidden-inset',
+    icon: __dirname.split("/").slice(0, -1).join('/') + '/icon.iconset/icon_256x256.png'
   });
 
   if (name == '_minimized') win.minimize();
