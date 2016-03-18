@@ -20,11 +20,9 @@ module.exports = function(win) {
   function insertCss(wc) {
     wc.insertCSS(fs.readFileSync(dir + '/web/css/custom.css', 'utf8'));
     try {
-      var customCss = 'custom-' + platform.os.family.toLowerCase() + '.css';
+      var customCss = 'custom-' + platform.os.family.replace(/\s/, '').toLowerCase() + '.css';
       wc.insertCSS(fs.readFileSync(dir + '/web/css/' + customCss, 'utf8'));
       console.log('Using specific styles: ' + customCss);
-    } catch (e) {
-      console.log('Platform specific styles not defined');
-    }
+    } catch (e) {}
   }
 };
