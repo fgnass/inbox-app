@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var URL = require('url');
+var platform = require('platform');
 
 var dir = path.resolve(__dirname, '..');
 
@@ -9,10 +10,21 @@ module.exports = function(win) {
   wc.on('did-navigate', function(ev, url) {
     var host = URL.parse(url).host;
     if (host == 'inbox.google.com') {
-      wc.insertCSS(fs.readFileSync(dir + '/web/custom.css', 'utf8'));
+      insertCss(wc);
       wc.executeJavaScript('module.paths.push("' + dir + '/node_modules");');
       wc.executeJavaScript('module.paths.push("' + dir + '/web");');
       wc.executeJavaScript('require("inject");');
     }
   });
+
+  function insertCss(wc) {
+    wc.insertCSS(fs.readFileSync(dir + '/web/css/custom.css', 'utf8'));
+    try {
+      var customCss = 'custom-' + platform.os.family.toLowerCase() + '.css';
+      wc.insertCSS(fs.readFileSync(dir + '/web/css/' + customCss, 'utf8'));
+      console.log('Using specific styles: ' + customCss);
+    } catch (e) {
+      console.log('Platform specific styles not defined');
+    }
+  }
 };
