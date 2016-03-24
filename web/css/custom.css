@@ -55,15 +55,15 @@ body .Y {
 /* title bar
  ************/
 
-/* make room for window controls */
-.c7 {
-  margin-left: 64px;
-}
-
 /* hide google apps and notifications */
 #gbwa,
 #gbwa + div {
   display: none;
+}
+
+/* move on the right Hangout icon to replace hidden tools */
+#lQGP9e {
+  right: 85px !important;
 }
 
 /* shrink the icon container */

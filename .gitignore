@@ -1,3 +1,4 @@
 Inbox-darwin-x64
 node_modules
 .DS_Store
+npm-debug.log

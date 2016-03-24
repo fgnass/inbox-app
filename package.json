@@ -8,10 +8,12 @@
   "scripts": {
     "rebuild": "electron-rebuild",
     "pack-icons": "iconutil -c icns icon.iconset",
-    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.5 --icon=icon.icns"
+    "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.5 --icon=icon.icns",
+    "start": "electron app/index.js"
   },
   "dependencies": {
-    "spellchecker": "^3.1.3"
+    "spellchecker": "^3.1.3",
+    "platform": "^1.3.1"
   },
   "devDependencies": {
     "electron-packager": "^5.1.0",

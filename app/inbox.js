@@ -1,8 +1,12 @@
 var electron = require('electron');
+var fs = require("fs");
 var BrowserWindow = electron.BrowserWindow;
 
 var inject = require('./inject');
 var windows = require('./windows');
+var path = require("path");
+
+var win;
 
 function getUserId(url) {
   // The `authuser` parameter is present when switching profiles
@@ -25,6 +29,22 @@ function getUserWindow(id) {
   }
 }
 
+function getBrowserWindowBounds() {
+  var data;
+  try {
+    data = JSON.parse(fs.readFileSync(exports.getBoundsFile(), 'utf8'));
+  } catch (e) {}
+  return (data && data.bounds) ? data.bounds : {
+    width: 1024,
+    height: 768
+  };
+}
+
+// Return the main window bounds json file
+exports.getBoundsFile = function() {
+  return path.join(electron.app.getPath('userData'), "init.json");
+}
+
 exports.open = function(url, name) {
   // look for an existing window
   var id = getUserId(url);
@@ -33,11 +53,13 @@ exports.open = function(url, name) {
     win.show();
     return win;
   }
-  var win = new BrowserWindow({
-    width: 1024,
-    height: 768,
+  var windowBounds = getBrowserWindowBounds();
+  win = new BrowserWindow({
+    width: windowBounds.width,
+    height: windowBounds.height,
     show: name != '_minimized',
-    'title-bar-style': 'hidden-inset'
+    'title-bar-style': 'hidden-inset',
+    icon: __dirname.split("/").slice(0, -1).join('/') + '/icon.iconset/icon_256x256.png'
   });
 
   if (name == '_minimized') win.minimize();
