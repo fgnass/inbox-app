@@ -9,6 +9,7 @@
     "rebuild": "electron-rebuild",
     "pack-icons": "iconutil -c icns icon.iconset",
     "pack-osx": "electron-packager ./ Inbox --overwrite --platform=darwin --arch=x64 --version=0.36.5 --icon=icon.icns",
+    "pack-linux": "electron-packager ./ Inbox --overwrite --platform=linux --arch=x64 --version=0.37.2 --icon=icon.icns",
     "start": "electron app/index.js"
   },
   "dependencies": {
