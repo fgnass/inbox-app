@@ -11,9 +11,11 @@ module.exports = function(win) {
     var host = URL.parse(url).host;
     if (host == 'inbox.google.com') {
       insertCss(wc);
-      wc.executeJavaScript('module.paths.push("' + dir + '/node_modules");');
-      wc.executeJavaScript('module.paths.push("' + dir + '/web");');
-      wc.executeJavaScript('require("inject");');
+      this.once('did-finish-load', function() {
+        wc.executeJavaScript('module.paths.push("' + dir + '/node_modules");');
+        wc.executeJavaScript('module.paths.push("' + dir + '/web");');
+        wc.executeJavaScript('require("inject");');
+      });
     }
   });
 
