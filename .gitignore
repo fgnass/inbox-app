@@ -1,5 +1,4 @@
 node_modules
 .DS_Store
 npm-debug.log
-Inbox-darwin-x64
-Inbox-linux-x64
+dist
