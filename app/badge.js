@@ -25,7 +25,7 @@ module.exports = function() {
 
   // Update the dock badge
   function update() {
-    if (typeof app.dock !== "undefined") {
+    if (typeof app.dock !== 'undefined') {
       var prev = app.dock.getBadge();
       var total = getTotal();
       if (total > 0) {
@@ -50,7 +50,7 @@ module.exports = function() {
   });
 
   app.on('will-quit', function() {
-    if (typeof app.dock !== "undefined") {
+    if (typeof app.dock !== 'undefined') {
       app.dock.setBadge('');
     }
   });

@@ -1,10 +1,11 @@
+var fs = require('fs');
+var path = require('path');
 var electron = require('electron');
-var fs = require("fs");
+
 var BrowserWindow = electron.BrowserWindow;
 
 var inject = require('./inject');
 var windows = require('./windows');
-var path = require("path");
 
 var win;
 
@@ -33,7 +34,9 @@ function getBrowserWindowBounds() {
   var data;
   try {
     data = JSON.parse(fs.readFileSync(exports.getBoundsFile(), 'utf8'));
-  } catch (e) {}
+  }
+  catch (e) {
+  }
   return (data && data.bounds) ? data.bounds : {
     width: 1024,
     height: 768
@@ -42,8 +45,8 @@ function getBrowserWindowBounds() {
 
 // Return the main window bounds json file
 exports.getBoundsFile = function() {
-  return path.join(electron.app.getPath('userData'), "init.json");
-}
+  return path.join(electron.app.getPath('userData'), 'init.json');
+};
 
 exports.open = function(url, name) {
   // look for an existing window
@@ -58,8 +61,8 @@ exports.open = function(url, name) {
     width: windowBounds.width,
     height: windowBounds.height,
     show: name != '_minimized',
-    'title-bar-style': 'hidden-inset',
-    icon: __dirname.split("/").slice(0, -1).join('/') + '/icon.iconset/icon_256x256.png'
+    titleBarStyle: 'hidden-inset',
+    icon: __dirname.split('/').slice(0, -1).join('/') + '/icon.iconset/icon_256x256.png'
   });
 
   if (name == '_minimized') win.minimize();

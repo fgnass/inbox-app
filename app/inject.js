@@ -23,8 +23,11 @@ module.exports = function(win) {
     wc.insertCSS(fs.readFileSync(dir + '/web/css/custom.css', 'utf8'));
     try {
       var customCss = 'custom-' + platform.os.family.replace(/\s/, '').toLowerCase() + '.css';
+      console.log(customCss);
       wc.insertCSS(fs.readFileSync(dir + '/web/css/' + customCss, 'utf8'));
       console.log('Using specific styles: ' + customCss);
-    } catch (e) {}
+    }
+    catch (e) {
+    }
   }
 };
