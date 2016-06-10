@@ -1,0 +1,9 @@
+/* make room for window controls */
+.c7 {
+  margin-left: 64px;
+}
+
+/*make titlebar draggable */
+.hn {
+  -webkit-app-region: drag;
+}
