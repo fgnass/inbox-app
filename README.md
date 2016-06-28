@@ -25,7 +25,7 @@ npm run pack-osx
 cp -r Inbox-darwin-x64/Inbox.app /Applications
 ```
 
-Inbox.app currently only works on OS X although adding support for Windows and Linux shouldn't be that hard. Pull requests welcome!
+Inbox.app currently works on MacOS and Linux. Adding support for Windows shouldn't be hard, pull requests are welcome!
 
 
 # Disclaimer
