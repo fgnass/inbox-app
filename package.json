@@ -11,6 +11,7 @@
     "pack-icons": "iconutil -c icns icon.iconset",
     "pack-osx": "electron-packager . --out=dist --prune --asar --overwrite --platform=darwin --arch=x64 --icon=icon.icns",
     "pack-linux": "electron-packager . --out=dist --prune --asar --overwrite --platform=linux --arch=x64 --icon=icon.icns",
+    "pack-win32": "electron-packager . --out=dist --prune --asar --overwrite --platform=win32 --arch=x64 --icon=icon.iconset/icon_256x256.ico  --version-string.ProductName=\"Inbox\" --version-string.FileDescription=\"Inbox\" --version-string.OriginalFilename=\"Inbox.exe\"",
     "start": "electron app"
   },
   "dependencies": {
