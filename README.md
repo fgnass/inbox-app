@@ -19,13 +19,21 @@ You can download a binary version for OS X here: [Inbox.app.zip](https://github.
 
 ## Building
 
+### OSX
+
 ```
 npm install
 npm run pack-osx
 cp -r Inbox-darwin-x64/Inbox.app /Applications
 ```
 
-Inbox.app currently works on MacOS and Linux. Adding support for Windows shouldn't be hard, pull requests are welcome!
+### Windows 
+```
+npm install
+npm run pack-win32
+```
+
+Inbox.app currently works on MacOS, Windows and Linux.
 
 
 # Disclaimer

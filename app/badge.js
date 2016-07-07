@@ -1,7 +1,38 @@
 var electron = require('electron');
 var app = electron.app;
+var NativeImage = electron.nativeImage;
 var BrowserWindow = electron.BrowserWindow;
 var ipc = electron.ipcMain;
+
+function setBadge(text) {
+  if (app.dock) {
+    app.dock.setBadge('' + text);
+  } 
+  else if (process.platform === 'win32') {
+    if (text === '') {
+      BrowserWindow.getAllWindows().forEach(function(win) {
+        win.setOverlayIcon(null, '');
+      });
+      return;
+    }
+    
+    var wc = BrowserWindow.getAllWindows()[0].webContents;
+    if (!wc) {
+      // window shutting down 
+      return;
+    }
+
+    wc.executeJavaScript('window.createBadge("'+text+'");', function(badgeDataURL) {
+      var img = NativeImage.createFromDataURL(badgeDataURL);
+      
+      BrowserWindow.getAllWindows().forEach(function(win) {
+        win.setOverlayIcon(img, text);
+      });
+    });
+  }
+}
+
+var badgeValue = 0;
 
 module.exports = function() {
 
@@ -25,17 +56,22 @@ module.exports = function() {
 
   // Update the dock badge
   function update() {
-    if (typeof app.dock !== 'undefined') {
-      var prev = app.dock.getBadge();
+      var prev = badgeValue;
       var total = getTotal();
-      if (total > 0) {
-        app.dock.setBadge('' + total);
-        if (total > prev) app.dock.bounce('informational');
+      if (total == prev) {
+        return;
       }
-      else {
-        app.dock.setBadge('');
+      
+      badgeValue = total;
+      if(total == 0) {
+        setBadge('');
+        return;
       }
-    }
+
+      setBadge('' + total);
+      if (total > prev && app.dock) {
+        app.dock.bounce('informational');
+      }
   }
 
   // Update the `unreadCount` property of the sender's BrowserWindow
@@ -49,10 +85,15 @@ module.exports = function() {
     update();
   });
 
+  ipc.on('update-icon', function(event, data) {
+    var win = BrowserWindow.fromWebContents(event.sender);
+    var img = NativeImage.createFromDataUrl(data.url);
+
+    win.setOverlayIcon(img, data.text);
+  });
+
   app.on('will-quit', function() {
-    if (typeof app.dock !== 'undefined') {
-      app.dock.setBadge('');
-    }
+    setBadge('');
   });
 
   app.on('activate', function() {

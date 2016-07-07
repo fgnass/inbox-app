@@ -3,7 +3,7 @@ var path = require('path');
 var URL = require('url');
 var platform = require('platform');
 
-var dir = path.resolve(__dirname, '..');
+var dir = path.resolve(__dirname, '..').replace(/\\/g, '/');
 
 module.exports = function(win) {
   var wc = win.webContents;
