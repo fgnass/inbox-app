@@ -2,10 +2,10 @@
   "name": "inbox-app",
   "productName": "Inbox",
   "version": "1.0.0",
-  "description": "Electron",
+  "description": "Google Inbox packaged as Electron app",
   "main": "app",
   "author": "Felix Gnass <fgnass@gmail.com>",
-  "license": "MIT",
+  "license": "Unlicense",
   "scripts": {
     "rebuild": "electron-rebuild",
     "pack-icons": "iconutil -c icns icon.iconset",
@@ -21,5 +21,6 @@
     "electron-prebuilt": "^1.2.1",
     "electron-rebuild": "^1.1.5",
     "eslint": "^2.11.1"
-  }
+  },
+  "repository": "https://github.com/fgnass/inbox-app"
 }
