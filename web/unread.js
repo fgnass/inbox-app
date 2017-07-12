@@ -60,7 +60,7 @@ function getNew(messages) {
 }
 
 function getUnreadMessages() {
-  if (!document.querySelector('.hn.b4')) return []; // not inside the inbox
+  if (!document.querySelector('.hA [title=Inbox]')) return []; // not inside the inbox
   return qsa('.ss').map(extractData).filter(Boolean);
 }
 
