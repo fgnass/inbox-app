@@ -6,13 +6,20 @@ var qsa = require('./qsa');
 
 var seen;
 
+function ancestor(n, selector) {
+  while (n) {
+    if (n.webkitMatchesSelector(selector)) return n;
+    n = n.parentNode;
+  }
+}
+
 function extractData(ss) {
   var id, avatar, sender, subject;
 
-  var p = ss.parentNode.parentNode.parentNode.parentNode.parentNode;
+  var p = ancestor(ss, '.jS');
   var a = p.querySelector('[data-action-data]');
   var action = a.dataset.actionData;
-  id = /#.+?:([^"]+)/.exec(action)[1];
+  id = /#.+?([^"]+)/.exec(action)[1];
 
   if (id.indexOf('^' === 0)) {
     // Use textContent for clusters
@@ -22,7 +29,6 @@ function extractData(ss) {
   if (p.classList.contains('full-cluster-item')
     || p.querySelector('.itemIconMarkedDone')
   ) return;
-
 
   subject = (p.querySelector('.lt') || p.querySelector('.qG span')).textContent;
 
@@ -64,7 +70,7 @@ function getUnreadMessages() {
   return qsa('.ss').map(extractData).filter(Boolean);
 }
 
-window.createBadge = function (text) {
+window.createBadge = function(text) {
       // Create badge
     var canvas = document.createElement('canvas');
     canvas.height = 140;

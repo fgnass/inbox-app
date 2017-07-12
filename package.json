@@ -16,11 +16,11 @@
     "start": "electron app"
   },
   "dependencies": {
-    "electron-packager": "^7.2.0",
+    "electron": "^1.6.11",
+    "electron-packager": "^8.7.2",
     "electron-prebuilt": "^1.2.6",
     "electron-rebuild": "^1.1.5",
     "eslint": "^2.11.1",
-    "platform": "^1.3.1",
     "spellchecker": "^3.1.3"
   }
 }
